@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.Thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>List of Teams</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Teams</h1>
+	
+	<h2 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h2>
+	
+	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+	</form>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>City</th>
+			<th>Coach</th>
+
+		</tr>
+		<tr th:each="team : ${teams}">
+		<td th:text="${team.name}">Name</td> 
+		<td th:text="${team.city}">City</td>
+		<td th:text="${team.coach}">Coach</td>
+		<td><a th:href="@{/delete/{id}(id=${team.teamid})}">Delete</a></td> 
+		<td><a th:href="@{/edit/{id}(id=${team.teamid})}">Edit</a></td> 
+		</tr>	
+	</table>
+	<a href="/add">Add a Team</a>
+</body>
+</html>
