@@ -1,16 +1,23 @@
 package hh.swd20.Tournament.webcontroller;
 
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.Tournament.domain.Player;
 import hh.swd20.Tournament.domain.PlayerRepository;
+import hh.swd20.Tournament.domain.Team;
+import hh.swd20.Tournament.domain.TeamRepository;
+
 
 
 @Controller
@@ -22,20 +29,11 @@ public class PlayerController {
 
 		
 		@Autowired
-		public PlayerRepository pRepository;
+		private PlayerRepository pRepository;
 		
+		@Autowired
+		private TeamRepository tRepository;
 		
-//		// Front page
-//		@RequestMapping(value = "/index", method = RequestMethod.GET) 
-//			public String getIndex(Model model) {
-//			return "index";
-//			
-//		}
-//		// Login
-//		@RequestMapping(value="/login")
-//		    public String login() {	
-//		    return "login";
-//		    }
 		
 				//List all players
 				@RequestMapping(value = "/playerlist", method = RequestMethod.GET)
@@ -46,20 +44,22 @@ public class PlayerController {
 		
 		}
 				//Add a new player
-				@RequestMapping(value = "/addplayer")
+				@RequestMapping(value = "/add")
 				public String addPlayer(Model model) {
-					model.addAttribute("players", new Player());
+					model.addAttribute("player", new Player());
+					model.addAttribute("teams", tRepository.findAll());
 					
 					return "addplayer";
 		}
 				//Save a player
-				@RequestMapping(value = "/saveplayer", method = RequestMethod.POST)
+				@RequestMapping(value = "/save", method = RequestMethod.POST)
 				public String savePlayer(Player player) {
 					pRepository.save(player);
 					
 					return "redirect:playerlist";
 		}
 				// Remove a player
+				@PreAuthorize("hasAuthority('ADMIN')")
 				@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
 				public String deletePlayer(@PathVariable("id") Long playerId, Model model) {
 					pRepository.deleteById(playerId);
@@ -67,13 +67,27 @@ public class PlayerController {
 					return "redirect:../playerlist";
 				}
 				// Edit a player
-				@RequestMapping("/modify/{id}")
+				@PreAuthorize("hasAuthority('ADMIN')")
+				@RequestMapping(value = "/modify/{id}")
 				public String editPlayer(@PathVariable("id") Long playerId, Model model) {
-				model.addAttribute("team", pRepository.findById(playerId));
+				model.addAttribute("player", pRepository.findById(playerId));
+				model.addAttribute("teams", tRepository.findAll());
 			
 				return "editplayer";
 				}
+				// RESTful service to get all players
 				
-	
+			    @RequestMapping(value="/players", method = RequestMethod.GET)
+			    public @ResponseBody List<Player> playerListRest() {	
+			        return (List<Player>) pRepository.findAll();
+			    }    
 
-}
+				// RESTful service to get a player by id
+				
+			    @RequestMapping(value="/players/{id}", method = RequestMethod.GET)
+			    public @ResponseBody Optional<Player> findPlayerRest(@PathVariable("id") Long Id) {	
+			    	return pRepository.findById(Id);
+			    } 	
+
+}		
+

@@ -24,8 +24,19 @@ public class TournamentApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(TeamRepository teamRepository, UserRepository uRepository, PlayerRepository prepository) {
+	public CommandLineRunner demo(TeamRepository teamRepository, UserRepository uRepository, PlayerRepository pRepository) {
 		return (args) -> {
+			
+			log.info("Save some teams");
+			Team team1 = new Team("The Sankarit", "Joensuu", "Marko Markonen");
+			teamRepository.save(team1); // saving the 1st team
+			Team team2 = new Team("Tigers", "Tikkala", "Jichael Mordan");
+			teamRepository.save(team2);
+			Team team3 = new Team("Lakers", "LA", "Frank Vogel");
+			teamRepository.save(team3);
+			
+			pRepository.save(new Player("Lebron", "James", 23, 1984, team1));	// Saving the first book with category.
+			pRepository.save(new Player("Hirmuinen", "Rölli", 00, 1970, team2)); // Saving the 2nd book with category.
 			
 			// Creates demousers akseli/akseli & user/user
 			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER", "User@demouser.db");
@@ -33,30 +44,15 @@ public class TournamentApplication {
 			uRepository.save(user1);
 			uRepository.save(user2);
 			
-			log.info("Saving some demo teams");
-			
-			Team team1 = new Team("The Sankarit", "Joensuu", "Marko Markonen");
-			Team team2 = new Team("Tigers", "Tikkala", "Jichael Mordan");
-			Team team3 = new Team("Lakers", "LA", "Frank Vogel");
-			teamRepository.save(team1);
-			teamRepository.save(team2);
-			teamRepository.save(team3);
-			
-			log.info("List all new teams");
+			log.info("fetch all teams");
 			for (Team team : teamRepository.findAll()) {
 				log.info(team.toString());
 				
-			log.info("Saving some demo players");
-			
-			Player player1 = new Player("Lebron", "James", 23, 1984, team3);
-			Player player2 = new Player("Hirmuinen", "Rölli", 00, 1970, team2);
-			prepository.save(player1);
-			prepository.save(player2);
-			
-			log.info("List the demo players");
-			for (Player player : prepository.findAll()) {
+			log.info("fetch all players");
+			for (Player player : pRepository.findAll()) {
 				log.info(player.toString());
-				}
+				
+		}
 			}
 		};
 	}

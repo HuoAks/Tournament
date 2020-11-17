@@ -1,0 +1,30 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit player information</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Edit a player</h1>
+	<div>
+	<form th:object="${player}" th:action="@{../save}" action="#" method="post">
+	<input type="hidden" th:field="*{id}" class="form-control"/>
+	<label for="firstname">Firstname</label>
+	<input type="text" id="firstname" th:field="*{firstname}" />
+	<label for="lastname">Lastname</label>
+	<input type="text" id="lastname" th:field="*{lastname}" />
+	<label for="nubmer">Number</label>
+	<input type="text" id="number" th:field="*{number}" />
+	<label for="birthyear">Born</label>
+	<input type="text" id="birthyear" th:field="*{birthyear}" />
+	<label for="teamlist">Team</label>
+	<select id="tlist" th:field="*{team}" class="form-control">
+    <option th:each="team: ${teams}" th:value="${team.teamid}" th:text="${team.name}"></option>
+    </select>
+	
+	<input type="submit" value="Save"></input>
+	</form>
+	</div>
+</body>
+</html>

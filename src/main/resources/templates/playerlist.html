@@ -27,10 +27,10 @@
 		<td th:text="${player.number}">Number</td>
 		<td th:text="${player.birthyear}">Born</td>
 		<td th:text="${player.team.name}">Team</td>
-		<td><a th:href="@{/remove/{id}(id=${player.id})}">Remove</a></td> 
-		<td><a th:href="@{/modify/{id}(id=${player.id})}">Edit</a></td> 
+		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/remove/{id}(id=${player.id})}">Remove</a></td> 
+		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/modify/{id}(id=${player.id})}">Edit</a></td> 
 		</tr>	
 	</table>
-	<a href="/addplayer">Add a player</a>
+	<a href="/add">Add a player</a>
 </body>
 </html>

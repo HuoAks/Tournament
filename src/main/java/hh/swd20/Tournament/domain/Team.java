@@ -1,4 +1,4 @@
-package hh.swd20.Tournament.domain;
+	package hh.swd20.Tournament.domain;
 
 import java.util.List;
 

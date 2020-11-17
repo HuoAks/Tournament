@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.Thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Lineup</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Players</h1>
+	
+	<h2 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h2>
+	
+	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+	</form>
+	<table>
+	<tr>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Number</th>
+			<th>Born</th>
+			<th>Team</th>
+	</tr>
+		<tr th:each="team.player : ${players}">
+		<td th:text="${team.player.firstname}">Firstname</td> 
+		<td th:text="${team.player.lastname}">Lastname</td>
+		<td th:text="${team.player.number}">Number</td>
+		<td th:text="${team.player.birthyear}">Born</td>
+		<td th:text="${team.player.team.name}">Team</td>
+		<td><a th:href="@{/remove/{id}(id=${player.id})}">Remove</a></td> 
+		<td><a th:href="@{/modify/{id}(id=${player.id})}">Edit</a></td> 
+		</tr>	
+	</table>
+	<a href="/new">Add a Team</a>
+</body>

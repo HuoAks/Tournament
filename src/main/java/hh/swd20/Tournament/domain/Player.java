@@ -95,9 +95,7 @@ public class Player {
 	@Override
 	public String toString() {
 		return "Player [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", number=" + number
-				+ ", birthyear=" + birthyear;
-		
-//		 + ", team=" + team + "]"
+				+ ", birthyear=" + birthyear + ", team=" + team;
 	}
 	
 	

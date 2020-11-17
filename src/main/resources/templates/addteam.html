@@ -8,7 +8,7 @@
 <body>
 	<h1>New team</h1>
 	<div>
-		<form th:object="${teams}" th:action="@{save}" action="#" method="post">
+		<form th:object="${teams}" th:action="@{create}" action="#" method="post">
 		  	<label for="name">Name</label>
 			<input type="text" id="name" th:field="*{name}" />
 			<div style="clear: both; display: block; height: 10px;"></div>

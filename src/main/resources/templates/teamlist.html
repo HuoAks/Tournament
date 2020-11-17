@@ -25,8 +25,9 @@
 		<td th:text="${team.coach}">Coach</td>
 		<td><a th:href="@{/delete/{id}(id=${team.teamid})}">Delete</a></td> 
 		<td><a th:href="@{/edit/{id}(id=${team.teamid})}">Edit</a></td> 
+		<td><a th:href="@{/lineup/{id}(id=${team.teamid})}">View lineup</a></td>
 		</tr>	
 	</table>
-	<a href="/add">Add a Team</a>
+	<a sec:authorize="hasAuthority('ADMIN')" href="/new">Add a Team</a>
 </body>
 </html>
