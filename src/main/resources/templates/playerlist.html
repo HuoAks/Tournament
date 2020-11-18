@@ -3,22 +3,24 @@
 <head>
 <title>List of all players</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link th:href = "@{/css/bootstrap.min.css}" rel ="stylesheet">
+		
 </head>
 <body>
-	<h1>Players</h1>
+
+	<div>
+	<table class="table table-striped">
+	 <thead class="thead-dark">
 	
-	<h2 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h2>
-	
-	<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
-	</form>
-	<table>
 		<tr>
 			<th>Firstname</th>
 			<th>Lastname</th>
 			<th>Number</th>
 			<th>Born</th>
 			<th>Team</th>
+			<th></th>
+			<th></th>
+			<th sec:authorize="hasAuthority('ADMIN')"> </th>
 
 		</tr>
 		<tr th:each="player : ${players}">
@@ -27,10 +29,24 @@
 		<td th:text="${player.number}">Number</td>
 		<td th:text="${player.birthyear}">Born</td>
 		<td th:text="${player.team.name}">Team</td>
-		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/remove/{id}(id=${player.id})}">Remove</a></td> 
+		<td sec:authorize="hasAuthority('ADMIN')"><a class="text-danger" th:href="@{/remove/{id}(id=${player.id})}">Remove</a></td> 
 		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/modify/{id}(id=${player.id})}">Edit</a></td> 
 		</tr>	
 	</table>
-	<a href="/add">Add a player</a>
+	</div>
+	
+	<div class="btn-group">
+  		<a class="btn btn-sm btn-secondary" href="/add">Add a player</a>
+  		<a href="/home" class="btn btn-sm btn-primary">Return</a>
+  	</div>
+  	
+  	<div class="text-right">
+  		<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		
+	</div>
+
+
+	</form>
 </body>
 </html>

@@ -4,32 +4,29 @@
 <head>
     <title>Players</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href = "@{/css/bootstrap.min.css}" rel ="stylesheet">
 </head>
-<body>
-	<h1>Add a Player</h1>
-	<div>
+<body class="bg-dark">
+	<h1 class="text-white">Add a Player</h1>
+	<div class="form-group">
 		<form th:object="${player}" th:action="@{save}" action="#" method="post">
-		  	<label for="firstname">Firstname</label>
+		  	<label class="text-white" for="firstname">Firstname</label>
 			<input type="text" id="firstname" th:field="*{firstname}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="lastname">Lastname</label>
+		  	<label class="text-white" for="lastname">Lastname</label>
 			<input type="text" id="lastname" th:field="*{lastname}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="number">Number</label>
+		  	<label class="text-white" for="number">Number</label>
 			<input type="text" th:field="*{number}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<label for="birthyear">Born</label>
+			<label class="text-white"  for="birthyear">Born</label>
 			<input type="text" th:field="*{birthyear}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			
-			<label for="teamlist">Team</label>
-			 <select id="tlist" th:field="*{team}" class="form-control">
+			<label class="text-white" for="teamlist">Team</label>
+			<select id="tlist" th:field="*{team}" class="form-control-sm" style= "width: 200px;">
        		<option th:each="team: ${teams}" th:value="${team.teamid}" th:text="${team.name}"></option>
     		</select>
-			
-			
-			<input type="submit" value="Save"></input>
+    			
+			<input type="submit"class="btn btn-primary" value="Save"></input>
 		</form>
+			<br>
+			<a href="/playerlist" class="btn-sm btn-danger">Exit</a>
 	</div>
 </body>
 </html>

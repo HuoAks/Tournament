@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.Thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<title>List of Teams</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>List of Teams</title>
+<link th:href = "@{/css/bootstrap.min.css}" rel ="stylesheet">
 </head>
 <body>
-	<h1>Teams</h1>
 	
-	<h2 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h2>
-	
-	<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
-	</form>
-	<table>
+
+
+	<table class="table table-striped">
+	<thead class="thead-dark">
 		<tr>
 			<th>Name</th>
 			<th>City</th>
 			<th>Coach</th>
+			<th></th>
+			<th></th>
+			<th sec:authorize="hasAuthority('ADMIN')"> </th>
 
 		</tr>
 		<tr th:each="team : ${teams}">
 		<td th:text="${team.name}">Name</td> 
 		<td th:text="${team.city}">City</td>
 		<td th:text="${team.coach}">Coach</td>
-		<td><a th:href="@{/delete/{id}(id=${team.teamid})}">Delete</a></td> 
-		<td><a th:href="@{/edit/{id}(id=${team.teamid})}">Edit</a></td> 
-		<td><a th:href="@{/lineup/{id}(id=${team.teamid})}">View lineup</a></td>
+		<td sec:authorize="hasAuthority('ADMIN')"><a class="text-danger" th:href="@{/delete/{id}(id=${team.teamid})}">Delete</a></td> 
+		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${team.teamid})}">Edit</a></td> 
+		<td><a class="text-secondary" th:href="@{/lineup/{id}(id=${team.teamid})}">View lineup</a></td>
 		</tr>	
 	</table>
-	<a sec:authorize="hasAuthority('ADMIN')" href="/new">Add a Team</a>
+	
+		<div class="btn-group">
+  		<a class="btn btn-sm btn-secondary" sec:authorize="hasAuthority('ADMIN')" href="/new">Add a Team</a>
+  		<a href="/home" class="btn btn-sm btn-primary">Return</a>
+  	</div>
+  	
+  	<div class="text-right">
+  		<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		
+	</div>
+	
 </body>
 </html>

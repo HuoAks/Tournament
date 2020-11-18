@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	 protected void configure(HttpSecurity http) throws Exception {
         http
-        .authorizeRequests().antMatchers("/h2-console/**").permitAll()
+        .authorizeRequests().antMatchers("/h2-console/**", "/css/**").permitAll()
         .anyRequest().authenticated()
         .and()
         .csrf().ignoringAntMatchers("/h2-console/**")
@@ -33,11 +33,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
       .formLogin()
       	  .loginPage("/login")
-          .defaultSuccessUrl("/teamlist", true)
+          .defaultSuccessUrl("/home", true)
           .permitAll()
           .and()
       .logout()
-          .permitAll();
+          .permitAll()
+          .invalidateHttpSession(true); // Invalidate session
     }
 
 	  

@@ -17,6 +17,7 @@ import java.util.Optional;
 import hh.swd20.Tournament.domain.Team;
 import hh.swd20.Tournament.domain.TeamRepository;
 import hh.swd20.Tournament.domain.PlayerRepository;
+import hh.swd20.Tournament.domain.Player;
 
 
 @Controller
@@ -29,7 +30,7 @@ public class TeamController {
 	private PlayerRepository pRepository;
 	
 	// Front page
-	@RequestMapping(value = "/index", method = RequestMethod.GET) 
+	@RequestMapping(value = "/home", method = RequestMethod.GET) 
 		public String getIndex(Model model) {
 		return "index";
 		
@@ -91,5 +92,14 @@ public class TeamController {
 		    @RequestMapping(value="/teams/{id}", method = RequestMethod.GET)
 		    public @ResponseBody Optional<Team> findTeamRest(@PathVariable("id") Long teamId) {	
 		    	return teamRepository.findById(teamId);
-		    } 
+		    }
+		    
+
+		    
+		    //Team lineups
+		    @RequestMapping(value="lineup/{id}", method = RequestMethod.GET)
+		    public String getLineup() {
+		    	
+		    	return "lineups";
+		    }
 	}

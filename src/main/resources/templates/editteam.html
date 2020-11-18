@@ -4,20 +4,21 @@
 <head>
     <title>Edit team information</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href = "@{/css/bootstrap.min.css}" rel ="stylesheet">
 </head>
-<body>
-	<h1>Edit a Team</h1>
+<body class="bg-dark">
+	<h1 class="text-white">Edit a Team</h1>
 	<div>
-	<form th:object="${team}" th:action="@{../save}" action="#" method="post">
+	<form th:object="${team}" th:action="@{../create}" action="#" method="post">
 	<input type="hidden" th:field="*{teamid}" class="form-control"/>
-	<label for="name">Name</label>
+	<label class="text-white" for="name">Name</label>
 	<input type="text" id="name" th:field="*{name}" />
-	<label for="city">City</label>
+	<label class="text-white" for="city">City</label>
 	<input type="text" id="city" th:field="*{city}" />
-	<label for="coach">Coach</label>
+	<label class="text-white" for="coach">Coach</label>
 	<input type="text" id="coach" th:field="*{coach}" />
 	
-	<input type="submit" value="Save"></input>
+	<input type="submit" value="Save" class="btn-sm btn-primary"></input>
 	</form>
 	</div>
 </body>
