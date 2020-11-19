@@ -7,19 +7,19 @@
 </head>
 
 <body class="bg-dark">
-<h1  class="text-white">Tournament login</h1>
-<div  class="text-white" th:if="${param.error}">
-Invalid username or password.
-</div>
-<div  class="text-white" th:if="${param.logout}">
-You have been logged out
-</div>
+	<h1  class="text-white">Tournament login</h1>
+			<div  class="text-white" th:if="${param.error}">
+					Invalid username or password.
+			</div>
+			<div  class="text-white" th:if="${param.logout}">
+				You have been logged out
+			</div>
 <br>
-<form class="form-group" th:action="@{/login}" method="post">
-<div><label class="text-white"> Username : <input type="text" name="username"/> </label></div>
-<div><label class="text-white"> Password: <input type="password" name="password"/> </label></div>
-<div><input class="btn btn-success" type="submit" value="Sign In"/></div>
-</form>
+	<form class="form-group" th:action="@{/login}" method="post">
+		<div><label class="text-white"> Username: <input type="text" name="username"/> </label></div>
+		<div><label class="text-white"> Password: <input type="password" name="password"/> </label></div>
+		<div><input class="btn btn-success" type="submit" value="Sign In"/></div>
+	</form>
 
 </body>
 

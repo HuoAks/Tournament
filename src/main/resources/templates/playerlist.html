@@ -30,7 +30,7 @@
 		<td th:text="${player.birthyear}">Born</td>
 		<td th:text="${player.team.name}">Team</td>
 		<td sec:authorize="hasAuthority('ADMIN')"><a class="text-danger" th:href="@{/remove/{id}(id=${player.id})}">Remove</a></td> 
-		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/modify/{id}(id=${player.id})}">Edit</a></td> 
+		<td><a th:href="@{/modify/{id}(id=${player.id})}">Edit</a></td> 
 		</tr>	
 	</table>
 	</div>
@@ -42,7 +42,7 @@
   	
   	<div class="text-right">
   		<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
 		
 	</div>
 

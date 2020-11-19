@@ -14,7 +14,7 @@ import hh.swd20.Tournament.webcontroller.PlayerController;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class BookstoreApplicationTests {
+class TournamentApplicationTests {
 	
 	@Autowired
 	private TeamController tController;

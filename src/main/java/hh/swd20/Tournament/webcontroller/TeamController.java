@@ -17,7 +17,7 @@ import java.util.Optional;
 import hh.swd20.Tournament.domain.Team;
 import hh.swd20.Tournament.domain.TeamRepository;
 import hh.swd20.Tournament.domain.PlayerRepository;
-import hh.swd20.Tournament.domain.Player;
+
 
 
 @Controller
@@ -29,16 +29,16 @@ public class TeamController {
 	@Autowired
 	private PlayerRepository pRepository;
 	
-	// Front page
-	@RequestMapping(value = "/home", method = RequestMethod.GET) 
-		public String getIndex(Model model) {
-		return "index";
+			// Front page
+			@RequestMapping(value = "/home", method = RequestMethod.GET) 
+			public String getIndex(Model model) {
+			return "index";
 		
 	}
-	// Login
-	@RequestMapping(value="/login")
-	    public String login() {	
-	    return "login";
+			// Login
+			@RequestMapping(value="/login")
+			public String login() {	
+			return "login";
 	    }
 	
 			//List all teams

@@ -35,8 +35,8 @@ public class TournamentApplication {
 			Team team3 = new Team("Lakers", "LA", "Frank Vogel");
 			teamRepository.save(team3);
 			
-			pRepository.save(new Player("Lebron", "James", 23, 1984, team1));	// Saving the first book with category.
-			pRepository.save(new Player("Hirmuinen", "Rölli", 00, 1970, team2)); // Saving the 2nd book with category.
+			pRepository.save(new Player("Lebron", "James", 23, 1984, team3));	// Saving players with a team
+			pRepository.save(new Player("Hirmuinen", "Rölli", 00, 1970, team2)); 
 			
 			// Creates demousers akseli/akseli & user/user
 			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER", "User@demouser.db");

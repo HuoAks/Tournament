@@ -67,7 +67,6 @@ public class PlayerController {
 					return "redirect:../playerlist";
 				}
 				// Edit a player
-				@PreAuthorize("hasAuthority('ADMIN')")
 				@RequestMapping(value = "/modify/{id}")
 				public String editPlayer(@PathVariable("id") Long playerId, Model model) {
 				model.addAttribute("player", pRepository.findById(playerId));
